@@ -1,4 +1,4 @@
-﻿// ===== 宸ュ叿鍑芥暟 =====
+// ===== 工具函数 =====
 function showToast(icon, msg, duration = 3000) {
   const toast = document.getElementById('toast');
   if (!toast) return;
@@ -9,7 +9,7 @@ function showToast(icon, msg, duration = 3000) {
   toast._timer = setTimeout(() => toast.classList.remove('show'), duration);
 }
 
-// ===== 鏆楅粦妯″紡 =====
+// ===== 暗黑模式 =====
 function initDarkMode() {
   const saved = localStorage.getItem('darkMode');
   if (saved === 'true') document.body.classList.add('dark');
@@ -20,7 +20,7 @@ function toggleDark() {
   localStorage.setItem('darkMode', document.body.classList.contains('dark'));
 }
 
-// ===== 绉诲姩绔彍鍗?=====
+// ===== 移动端菜单 =====
 function initMenu() {
   const btn = document.getElementById('menuBtn');
   const links = document.getElementById('navLinks');
@@ -28,7 +28,7 @@ function initMenu() {
   btn.addEventListener('click', () => {
     links.classList.toggle('open');
   });
-  // 鐐瑰嚮澶栭儴鍏抽棴
+  // 点击外部关闭
   document.addEventListener('click', (e) => {
     if (!btn.contains(e.target) && !links.contains(e.target)) {
       links.classList.remove('open');
@@ -36,7 +36,7 @@ function initMenu() {
   });
 }
 
-// ===== 鏂囩珷鍒楄〃娓叉煋锛堜粎棣栭〉锛?=====
+// ===== 文章列表渲染（仅首页）=====
 const PAGE_SIZE = 6;
 let currentPage = 1;
 let filteredPosts = [];
@@ -51,7 +51,7 @@ function renderPosts(posts, page = 1) {
   const start = (page - 1) * PAGE_SIZE;
   const pagePosts = posts.slice(start, start + PAGE_SIZE);
 
-  if (countEl) countEl.textContent = `鍏?${total} 绡嘸;
+  if (countEl) countEl.textContent = `共 ${total} 篇`;
 
   grid.innerHTML = pagePosts.map(p => `
     <article class="post-card" onclick="location.href='post.html'">
@@ -66,8 +66,8 @@ function renderPosts(posts, page = 1) {
         </div>
       </div>
       <div class="card-footer">
-        <span class="reading-time">鈴?${p.readTime} 鍒嗛挓</span>
-        <span>馃憗 ${p.views.toLocaleString()}</span>
+        <span class="reading-time">⏱ ${p.readTime} 分钟</span>
+        <span>👁 ${p.views.toLocaleString()}</span>
       </div>
     </article>
   `).join('');
@@ -80,13 +80,13 @@ function renderPagination(total, current) {
   if (!el || total <= 1) { if (el) el.innerHTML = ''; return; }
 
   let html = '';
-  // 涓婁竴椤?
-  html += `<button class="page-btn" onclick="goPage(${current - 1})" ${current === 1 ? 'disabled style="opacity:.4"' : ''}>鈥?/button>`;
+  // 上一页
+  html += `<button class="page-btn" onclick="goPage(${current - 1})" ${current === 1 ? 'disabled style="opacity:.4"' : ''}>‹</button>`;
   for (let i = 1; i <= total; i++) {
     html += `<button class="page-btn ${i === current ? 'active' : ''}" onclick="goPage(${i})">${i}</button>`;
   }
-  // 涓嬩竴椤?
-  html += `<button class="page-btn" onclick="goPage(${current + 1})" ${current === total ? 'disabled style="opacity:.4"' : ''}>鈥?/button>`;
+  // 下一页
+  html += `<button class="page-btn" onclick="goPage(${current + 1})" ${current === total ? 'disabled style="opacity:.4"' : ''}>›</button>`;
   el.innerHTML = html;
 }
 
@@ -98,9 +98,9 @@ function goPage(page) {
   document.getElementById('allPosts')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// ===== 鍒嗙被绛涢€?=====
+// ===== 分类筛选 =====
 function filterPosts(cat, el) {
-  // 鏇存柊婵€娲绘爣绛炬牱寮?
+  // 更新激活标签样式
   document.querySelectorAll('#categoryFilter .tag').forEach(t => {
     t.style.background = '';
     t.style.color = '';
@@ -117,7 +117,7 @@ function filterPosts(cat, el) {
   renderPosts(filteredPosts, 1);
 }
 
-// ===== 鎼滅储 =====
+// ===== 搜索 =====
 function doSearch() {
   const heroInput = document.getElementById('heroSearch');
   const sideInput = document.getElementById('sideSearch');
@@ -132,9 +132,9 @@ function doSearch() {
       p.category.toLowerCase().includes(keyword)
     );
     if (filteredPosts.length === 0) {
-      showToast('馃攳', `娌℃湁鎵惧埌"${keyword}"鐩稿叧鐨勬枃绔燻);
+      showToast('🔍', `没有找到"${keyword}"相关的文章`);
     } else {
-      showToast('鉁?, `鎵惧埌 ${filteredPosts.length} 绡囩浉鍏虫枃绔燻);
+      showToast('✅', `找到 ${filteredPosts.length} 篇相关文章`);
     }
   }
 
@@ -143,7 +143,7 @@ function doSearch() {
   document.getElementById('allPosts')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// 鍥炶溅瑙﹀彂鎼滅储
+// 回车触发搜索
 function bindSearchEnter() {
   ['heroSearch', 'sideSearch'].forEach(id => {
     document.getElementById(id)?.addEventListener('keydown', e => {
@@ -152,17 +152,17 @@ function bindSearchEnter() {
   });
 }
 
-// ===== 璁㈤槄锛堥椤碉級 =====
+// ===== 订阅（首页）=====
 function subscribe() {
   const email = document.getElementById('subEmail')?.value;
-  if (!email || !email.includes('@')) { showToast('鈿狅笍', '璇疯緭鍏ユ湁鏁堥偖绠?); return; }
+  if (!email || !email.includes('@')) { showToast('⚠️', '请输入有效邮箱'); return; }
   if (document.getElementById('subEmail')) document.getElementById('subEmail').value = '';
-  showToast('馃帀', '璁㈤槄鎴愬姛锛屾劅璋綘鐨勫叧娉紒');
+  showToast('🎉', '订阅成功，感谢你的关注！');
 }
 
-// ===== 闃呰杩涘害鏉?=====
+// ===== 阅读进度条 =====
 function initProgressBar() {
-  // 浠呭湪鏂囩珷璇︽儏椤垫樉绀?
+  // 仅在文章详情页显示
   if (!document.querySelector('.post-article')) return;
   const bar = document.createElement('div');
   bar.style.cssText = 'position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent));z-index:9999;transition:width .1s linear;width:0';
@@ -174,11 +174,11 @@ function initProgressBar() {
   });
 }
 
-// ===== 鍥炲埌椤堕儴 =====
+// ===== 回到顶部 =====
 function initBackToTop() {
   const btn = document.createElement('button');
-  btn.textContent = '鈫?;
-  btn.title = '鍥炲埌椤堕儴';
+  btn.textContent = '↑';
+  btn.title = '回到顶部';
   btn.style.cssText = `
     position:fixed;bottom:80px;right:24px;
     width:40px;height:40px;border-radius:50%;
@@ -198,10 +198,10 @@ function initBackToTop() {
   });
 }
 
-// ===== 鏆楅粦妯″紡鍒囨崲鎸夐挳 =====
+// ===== 暗黑模式切换按钮 =====
 function initDarkToggle() {
   const btn = document.createElement('button');
-  btn.title = '鍒囨崲鏆楅粦妯″紡';
+  btn.title = '切换暗黑模式';
   btn.style.cssText = `
     position:fixed;bottom:24px;right:24px;
     width:40px;height:40px;border-radius:50%;
@@ -211,20 +211,20 @@ function initDarkToggle() {
     box-shadow:var(--shadow-md);
     transition:all .3s;
   `;
-  btn.textContent = '馃寵';
+  btn.textContent = '🌙';
   btn.addEventListener('click', () => {
     toggleDark();
-    btn.textContent = document.body.classList.contains('dark') ? '鈽€锔? : '馃寵';
+    btn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
     showToast(
-      document.body.classList.contains('dark') ? '馃寵' : '鈽€锔?,
-      document.body.classList.contains('dark') ? '宸插垏鎹㈠埌鏆楅粦妯″紡' : '宸插垏鎹㈠埌鏄庝寒妯″紡'
+      document.body.classList.contains('dark') ? '🌙' : '☀️',
+      document.body.classList.contains('dark') ? '已切换到暗黑模式' : '已切换到明亮模式'
     );
   });
-  if (document.body.classList.contains('dark')) btn.textContent = '鈽€锔?;
+  if (document.body.classList.contains('dark')) btn.textContent = '☀️';
   document.body.appendChild(btn);
 }
 
-// ===== 鍒濆鍖?=====
+// ===== 初始化 =====
 document.addEventListener('DOMContentLoaded', () => {
   initDarkMode();
   initMenu();
@@ -233,10 +233,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initDarkToggle();
   bindSearchEnter();
 
-  // 浠呭湪棣栭〉娓叉煋鏂囩珷鍒楄〃
+  // 仅在首页渲染文章列表
   if (document.getElementById('postsGrid')) {
     filteredPosts = [...POSTS];
     renderPosts(filteredPosts, 1);
   }
 });
-
