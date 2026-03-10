@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>晨曦博客 · 思想与技术的交汇</title>
+  <meta name="description" content="分享技术见解、生活感悟与设计思考的个人博客" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ===== 导航栏 ===== -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">✦ 晨曦博客</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">首页</a></li>
+      <li><a href="index.html#categories">分类</a></li>
+      <li><a href="about.html">关于</a></li>
+    </ul>
+    <button class="nav-menu-btn" id="menuBtn" aria-label="菜单">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== Hero 区域 ===== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">✨ 每周更新</div>
+    <h1>探索技术与生活<br/>的无限可能</h1>
+    <p>这里记录我的思考、技术实践与生活感悟，欢迎一起交流探讨。</p>
+    <div class="hero-search">
+      <input type="text" id="heroSearch" placeholder="搜索文章…" />
+      <button onclick="doSearch()">搜索</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 主内容 ===== -->
+<div class="container">
+  <div class="layout">
+
+    <!-- 左侧主体 -->
+    <main>
+      <!-- 精选文章 -->
+      <div class="section-header">
+        <h2 class="section-title">精选文章</h2>
+        <a href="#allPosts" class="view-all">查看全部 →</a>
+      </div>
+
+      <a href="post.html" class="featured-card">
+        <div class="featured-img">🚀</div>
+        <div class="featured-body">
+          <span class="post-category cat-tech">技术</span>
+          <h2>用 CSS Grid 构建现代响应式布局的最佳实践</h2>
+          <p>深入探讨 CSS Grid 的核心概念，通过实际案例演示如何优雅地处理复杂布局挑战，告别繁琐的浮动与定位。</p>
+          <div class="post-meta">
+            <div class="avatar">晨</div>
+            <span>晨曦</span>
+            <span>·</span>
+            <span>2025年12月18日</span>
+          </div>
+          <span class="read-more">阅读全文 →</span>
+        </div>
+      </a>
+
+      <!-- 文章列表 -->
+      <div id="allPosts">
+        <div class="section-header">
+          <h2 class="section-title">最新文章</h2>
+          <span id="postCount" style="font-size:.85rem;color:var(--text-muted)"></span>
+        </div>
+
+        <div class="posts-grid" id="postsGrid">
+          <!-- 由 JS 渲染 -->
+        </div>
+      </div>
+
+      <!-- 分页 -->
+      <div class="pagination" id="pagination"></div>
+    </main>
+
+    <!-- 右侧边栏 -->
+    <aside class="sidebar">
+      <!-- 搜索 -->
+      <div class="widget">
+        <div class="widget-title">🔍 搜索文章</div>
+        <div class="sidebar-search">
+          <input type="text" id="sideSearch" placeholder="关键词…" />
+          <button onclick="doSearch()">搜索</button>
+        </div>
+      </div>
+
+      <!-- 分类筛选 -->
+      <div class="widget" id="categories">
+        <div class="widget-title">📂 文章分类</div>
+        <div class="tags-cloud" id="categoryFilter">
+          <span class="tag active-tag" data-cat="all" onclick="filterPosts('all', this)">全部</span>
+          <span class="tag" data-cat="技术" onclick="filterPosts('技术', this)">技术</span>
+          <span class="tag" data-cat="设计" onclick="filterPosts('设计', this)">设计</span>
+          <span class="tag" data-cat="生活" onclick="filterPosts('生活', this)">生活</span>
+          <span class="tag" data-cat="旅行" onclick="filterPosts('旅行', this)">旅行</span>
+          <span class="tag" data-cat="美食" onclick="filterPosts('美食', this)">美食</span>
+        </div>
+      </div>
+
+      <!-- 标签云 -->
+      <div class="widget">
+        <div class="widget-title">🏷️ 热门标签</div>
+        <div class="tags-cloud">
+          <span class="tag">JavaScript</span><span class="tag">CSS</span>
+          <span class="tag">Vue.js</span><span class="tag">Python</span>
+          <span class="tag">极简主义</span><span class="tag">效率工具</span>
+          <span class="tag">读书笔记</span><span class="tag">UI设计</span>
+          <span class="tag">摄影</span><span class="tag">健康生活</span>
+        </div>
+      </div>
+
+      <!-- 最新文章排行 -->
+      <div class="widget">
+        <div class="widget-title">🔥 阅读排行</div>
+        <div class="recent-posts">
+          <a href="post.html" class="recent-item">
+            <div class="recent-num">1</div>
+            <div class="recent-info">
+              <h4>用 CSS Grid 构建现代响应式布局</h4>
+              <span>8,420 次阅读</span>
+            </div>
+          </a>
+          <a href="post.html" class="recent-item">
+            <div class="recent-num">2</div>
+            <div class="recent-info">
+              <h4>2025 年前端开发工具链选型指南</h4>
+              <span>7,105 次阅读</span>
+            </div>
+          </a>
+          <a href="post.html" class="recent-item">
+            <div class="recent-num">3</div>
+            <div class="recent-info">
+              <h4>极简主义生活方式的 30 天实践</h4>
+              <span>5,893 次阅读</span>
+            </div>
+          </a>
+          <a href="post.html" class="recent-item">
+            <div class="recent-num">4</div>
+            <div class="recent-info">
+              <h4>日本京都深度游攻略：六天五晚全记录</h4>
+              <span>4,670 次阅读</span>
+            </div>
+          </a>
+          <a href="post.html" class="recent-item">
+            <div class="recent-num">5</div>
+            <div class="recent-info">
+              <h4>Figma 高效工作流：从想法到交付</h4>
+              <span>3,958 次阅读</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- 订阅 -->
+      <div class="widget subscribe-widget">
+        <div class="widget-title">📩 订阅更新</div>
+        <p>不错过任何一篇好文章，订阅即可第一时间收到推送。</p>
+        <div class="subscribe-form">
+          <input type="email" id="subEmail" placeholder="your@email.com" />
+          <button onclick="subscribe()">立即订阅</button>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- ===== 页脚 ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">✦ 晨曦博客</div>
+        <p>记录技术见解与生活感悟，探索思想与代码的边界。感谢每一位读者的陪伴。</p>
+      </div>
+      <div class="footer-col">
+        <h4>快速导航</h4>
+        <ul>
+          <li><a href="index.html">首页</a></li>
+          <li><a href="about.html">关于我</a></li>
+          <li><a href="post.html">最新文章</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>分类</h4>
+        <ul>
+          <li><a href="#">技术</a></li>
+          <li><a href="#">设计</a></li>
+          <li><a href="#">生活</a></li>
+          <li><a href="#">旅行</a></li>
+          <li><a href="#">美食</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>联系方式</h4>
+        <ul>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">微信公众号</a></li>
+          <li><a href="#">邮件联系</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 晨曦博客 · 用心记录每一刻</span>
+      <span>使用纯 HTML / CSS / JS 构建</span>
+    </div>
+  </div>
+</footer>
+
+<!-- 通知 Toast -->
+<div class="toast" id="toast">
+  <span id="toastIcon">✅</span>
+  <span id="toastMsg"></span>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

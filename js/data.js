@@ -1,0 +1,121 @@
+﻿// ===== 鍗氬鏂囩珷鏁版嵁 =====
+const POSTS = [
+  {
+    id: 1,
+    title: "2025 骞村墠绔紑鍙戝伐鍏烽摼閫夊瀷鎸囧崡",
+    excerpt: "浠庢瀯寤哄伐鍏枫€佸寘绠＄悊鍣ㄥ埌娴嬭瘯妗嗘灦锛屽叏闈㈡⒊鐞嗙幇浠ｅ墠绔伐绋嬪寲浣撶郴锛屽府浣犲湪鐪艰姳缂贡鐨勯€夐」涓壘鍒版渶閫傚悎鑷繁鐨勭粍鍚堛€?,
+    category: "鎶€鏈?,
+    catClass: "cat-tech",
+    emoji: "鈿欙笍",
+    gradient: "var(--primary)",
+    author: "鏅ㄦ洣",
+    date: "2025骞?2鏈?0鏃?,
+    readTime: 10,
+    views: 7105
+  },
+  {
+    id: 2,
+    title: "鏋佺畝涓讳箟鐢熸椿鏂瑰紡鐨?30 澶╁疄璺?,
+    excerpt: "鎴戝皾璇曚簡涓€涓湀鐨勬瀬绠€涓讳箟鐢熸椿锛屾竻鐞嗕簡瀹堕噷涓夊垎涔嬩竴鐨勭墿鍝侊紝鍙戠幇浜嗘洿澶氭椂闂村拰鍐呭績鐨勫畞闈欍€?,
+    category: "鐢熸椿",
+    catClass: "cat-life",
+    emoji: "馃尶",
+    gradient: "var(--primary)",
+    author: "鏅ㄦ洣",
+    date: "2025骞?1鏈?8鏃?,
+    readTime: 6,
+    views: 5893
+  },
+  {
+    id: 3,
+    title: "鏃ユ湰浜兘娣卞害娓告敾鐣ワ細鍏ぉ浜旀櫄鍏ㄨ褰?,
+    excerpt: "涓嶈蛋椹鑺憋紝涓嶈窡鍥㈡墦鍗★紝鐢ㄥ叚澶╂椂闂存矇娴告劅鍙楄繖搴у崈骞村彜閮界殑缇庨銆佸搴欎笌琛楀贩銆?,
+    category: "鏃呰",
+    catClass: "cat-travel",
+    emoji: "鉀╋笍",
+    gradient: "var(--primary)",
+    author: "鏅ㄦ洣",
+    date: "2025骞?1鏈?5鏃?,
+    readTime: 12,
+    views: 4670
+  },
+  {
+    id: 4,
+    title: "Figma 楂樻晥宸ヤ綔娴侊細浠庢兂娉曞埌浜や粯",
+    excerpt: "鍒嗕韩鎴戝湪鏃ュ父璁捐宸ヤ綔涓Н绱殑 Figma 鎶€宸у拰宸ヤ綔娴佺▼锛岃璁捐涓庡紑鍙戠殑鍗忎綔鏇村姞椤虹晠楂樻晥銆?,
+    category: "璁捐",
+    catClass: "cat-design",
+    emoji: "馃帹",
+    gradient: "var(--primary)",
+    author: "鏅ㄦ洣",
+    date: "2025骞?0鏈?0鏃?,
+    readTime: 8,
+    views: 3958
+  },
+  {
+    id: 5,
+    title: "鐢?Vue 3 Composition API 閲嶆瀯涓€涓鏉傜粍浠?,
+    excerpt: "浠ヤ竴涓疄闄呴」鐩腑鐨勫鏉傝〃鍗曠粍浠朵负渚嬶紝婕旂ず濡備綍鐢?Composition API 灏嗘贩涔辩殑 Options API 浠ｇ爜閲嶆瀯涓烘竻鏅板彲缁存姢鐨勬ā鍧椼€?,
+    category: "鎶€鏈?,
+    catClass: "cat-tech",
+    emoji: "馃挌",
+    gradient: "var(--primary)",
+    author: "鏅ㄦ洣",
+    date: "2025骞?0鏈?8鏃?,
+    readTime: 14,
+    views: 3420
+  },
+  {
+    id: 6,
+    title: "娣卞鍘ㄦ埧锛氫竴涓▼搴忓憳鐨勫甯歌彍淇偧涔嬭矾",
+    excerpt: "浠庡彧浼氱叜娉￠潰锛屽埌鑳藉仛鍑轰竴妗屽儚鏍风殑楗彍锛屽垎浜袱骞磋嚜瀛﹀帹鑹虹殑蹇冨緱鍜屽嚑閬撳繀浼氬甯歌彍鑿滆氨銆?,
+    category: "缇庨",
+    catClass: "cat-food",
+    emoji: "馃崪",
+    gradient: "var(--primary)",
+    author: "鏅ㄦ洣",
+    date: "2025骞?0鏈?鏃?,
+    readTime: 7,
+    views: 2891
+  },
+  {
+    id: 7,
+    title: "TypeScript 5.x 鏂扮壒鎬у叏瑙ｆ瀽",
+    excerpt: "璇︾粏浠嬬粛 TypeScript 5.x 涓紩鍏ョ殑瑁呴グ鍣ㄣ€乧onst 绫诲瀷鍙傛暟绛夐噸纾呯壒鎬э紝闄勫甫鐪熷疄浠ｇ爜绀轰緥銆?,
+    category: "鎶€鏈?,
+    catClass: "cat-tech",
+    emoji: "馃挋",
+    gradient: "var(--primary)",
+    author: "鏅ㄦ洣",
+    date: "2025骞?9鏈?0鏃?,
+    readTime: 11,
+    views: 2634
+  },
+  {
+    id: 8,
+    title: "璁捐绯荤粺浠庨浂鍒颁竴锛氳惤鍦板疄璺垫€荤粨",
+    excerpt: "鍥為【鍦ㄥ伐浣滀腑涓诲寤虹珛鍏徃璁捐绯荤粺鐨勫叏杩囩▼锛屼粠缁勪欢瑙勮寖銆佽璁?Token 鍒版枃妗ｅ缓璁剧殑瀹屾暣缁忛獙鍒嗕韩銆?,
+    category: "璁捐",
+    catClass: "cat-design",
+    emoji: "馃彈锔?,
+    gradient: "var(--primary)",
+    author: "鏅ㄦ洣",
+    date: "2025骞?9鏈?鏃?,
+    readTime: 15,
+    views: 2210
+  },
+  {
+    id: 9,
+    title: "浜戝崡澶х悊鎱㈡椿鍗婃湀锛氳繑鐠炲綊鐪熺殑鏃呴€?,
+    excerpt: "鍦ㄥぇ鐞嗙殑 15 澶╋紝浣忓湪娲辨捣杈圭殑姘戝锛岄獞杞︾幆婀栵紝鍚冭矾杈规憡锛岃繖鏄不鎰堝€︽€犳渶濂界殑鏂瑰紡銆?,
+    category: "鏃呰",
+    catClass: "cat-travel",
+    emoji: "馃彅锔?,
+    gradient: "var(--primary)",
+    author: "鏅ㄦ洣",
+    date: "2025骞?8鏈?2鏃?,
+    readTime: 9,
+    views: 1987
+  }
+];
+
