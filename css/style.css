@@ -1,4 +1,4 @@
-﻿/* ===== 鍏ㄥ眬 Reset & 鍙橀噺 ===== */
+﻿/* ===== 全局 Reset & 变量 ===== */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -41,7 +41,7 @@ a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
 ul { list-style: none; }
 
-/* ===== 瀵艰埅鏍?===== */
+/* ===== 导航栏 ===== */
 .navbar {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
@@ -174,7 +174,7 @@ ul { list-style: none; }
   box-shadow: 0 4px 12px rgba(0,0,0,.2);
 }
 
-/* ===== 涓诲鍣?===== */
+/* ===== 主容器 ===== */
 .container {
   max-width: var(--max-w);
   margin: 0 auto;
@@ -182,7 +182,7 @@ ul { list-style: none; }
   flex: 1;
 }
 
-/* ===== 涓ゆ爮甯冨眬 ===== */
+/* ===== 两栏布局 ===== */
 .layout {
   display: grid;
   grid-template-columns: 1fr 300px;
@@ -190,7 +190,7 @@ ul { list-style: none; }
   align-items: start;
 }
 
-/* ===== 鍒嗗尯鏍囬 ===== */
+/* ===== 分区标题 ===== */
 .section-header {
   display: flex;
   align-items: center;
@@ -226,7 +226,7 @@ ul { list-style: none; }
 
 .view-all:hover { background: #ede9fe; }
 
-/* ===== 绮鹃€夋枃绔?(澶у崱鐗? ===== */
+/* ===== 精选文章(大卡片) ===== */
 .featured-card {
   background: var(--surface);
   border-radius: var(--radius);
@@ -320,7 +320,7 @@ ul { list-style: none; }
 
 .read-more:hover { gap: 10px; }
 
-/* ===== 鏂囩珷鍗＄墖缃戞牸 ===== */
+/* ===== 文章卡片网格 ===== */
 .posts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -391,7 +391,7 @@ ul { list-style: none; }
   gap: 4px;
 }
 
-/* ===== 渚ц竟鏍?===== */
+/* ===== 侧边栏 ===== */
 .sidebar { display: flex; flex-direction: column; gap: 28px; }
 
 .widget {
@@ -410,7 +410,7 @@ ul { list-style: none; }
   border-bottom: 2px solid var(--border);
 }
 
-/* 鎼滅储缁勪欢 */
+/* 搜索组件 */
 .sidebar-search {
   display: flex;
   gap: 8px;
@@ -443,7 +443,7 @@ ul { list-style: none; }
 
 .sidebar-search button:hover { background: var(--primary-dark); }
 
-/* 鏍囩浜?*/
+/* 标签云 */
 .tags-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
 
 .tag {
@@ -464,7 +464,7 @@ ul { list-style: none; }
   border-color: var(--primary);
 }
 
-/* 鏈€鏂版枃绔?*/
+/* 最新文章 */
 .recent-posts { display: flex; flex-direction: column; gap: 14px; }
 
 .recent-item {
@@ -505,7 +505,7 @@ ul { list-style: none; }
 
 .recent-info span { font-size: .75rem; color: var(--text-muted); }
 
-/* 璁㈤槄缁勪欢 */
+/* 订阅组件 */
 .subscribe-widget {
   background: var(--primary);
   color: white;
@@ -541,7 +541,7 @@ ul { list-style: none; }
 
 .subscribe-form button:hover { transform: scale(1.02); }
 
-/* ===== 鍒嗛〉 ===== */
+/* ===== 分页 ===== */
 .pagination {
   display: flex;
   justify-content: center;
@@ -567,7 +567,7 @@ ul { list-style: none; }
 .page-btn:hover { border-color: var(--primary); color: var(--primary); }
 .page-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-/* ===== 鏂囩珷璇︽儏椤?===== */
+/* ===== 文章详情页 ===== */
 .post-detail-layout {
   display: grid;
   grid-template-columns: 1fr 300px;
@@ -648,7 +648,7 @@ ul { list-style: none; }
 
 .post-stats span { display: flex; align-items: center; gap: 4px; }
 
-/* 鏂囩珷姝ｆ枃鏍峰紡 */
+/* 文章正文样式 */
 .article-body { font-size: 1.05rem; line-height: 1.9; color: #334155; }
 
 .article-body h2 {
@@ -712,10 +712,10 @@ ul { list-style: none; }
 
 .article-body a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
 
-/* 鏍囩琛?*/
+/* 标签行 */
 .post-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 32px; }
 
-/* 鏂囩珷鎿嶄綔 */
+/* 文章操作 */
 .post-actions {
   display: flex;
   gap: 12px;
@@ -742,7 +742,7 @@ ul { list-style: none; }
 .action-btn:hover { border-color: var(--primary); color: var(--primary); }
 .action-btn.liked { background: #fef2f2; border-color: #ef4444; color: #ef4444; }
 
-/* 璇勮鍖?*/
+/* 评论区 */
 .comments-section { padding: 40px; border-top: 1px solid var(--border); }
 
 .comments-section h3 { font-size: 1.2rem; font-weight: 700; font-family: var(--font-serif); margin-bottom: 24px; }
@@ -794,7 +794,7 @@ ul { list-style: none; }
 .comment-content span { font-size: .78rem; color: var(--text-muted); margin-bottom: 8px; display: block; }
 .comment-content p { font-size: .9rem; color: var(--text-muted); }
 
-/* ===== 鍏充簬椤?===== */
+/* ===== 关于页 ===== */
 .about-hero {
   background: var(--primary);
   color: white;
@@ -927,7 +927,7 @@ ul { list-style: none; }
 
 .stat-label { font-size: .82rem; color: var(--text-muted); font-weight: 600; }
 
-/* ===== 椤佃剼 ===== */
+/* ===== 页脚 ===== */
 footer {
   background: #19201e;
   color: #94a3b8;
@@ -973,7 +973,7 @@ footer {
   gap: 8px;
 }
 
-/* ===== 閫氱煡寮圭獥 ===== */
+/* ===== 通知弹窗 ===== */
 .toast {
   position: fixed;
   bottom: 24px;
@@ -996,10 +996,10 @@ footer {
 
 .toast.show { transform: translateY(0); opacity: 1; }
 
-/* ===== 鏆楅粦妯″紡 ===== */
+/* ===== 暗黑模式 ===== */
 body.dark { --bg: #1e2022; --surface: #2d2f33; --surface-2: #3a3d42; --text: #e8e6e1; --text-muted: #a3a098; --border: #42464c; }
 
-/* ===== 绉诲姩绔搷搴斿紡 ===== */
+/* ===== 移动端响应式 ===== */
 @media (max-width: 900px) {
   .layout, .post-detail-layout { grid-template-columns: 1fr; }
   .sidebar { display: none; }
@@ -1029,7 +1029,7 @@ body.dark { --bg: #1e2022; --surface: #2d2f33; --surface-2: #3a3d42; --text: #e8
   .post-stats { margin-left: 0; width: 100%; }
 }
 
-/* ===== 鍔犺浇鍔ㄧ敾 ===== */
+/* ===== 加载动画 ===== */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
